@@ -1,4 +1,4 @@
-# Sistema de Gerenciamento Pesquisas Acadêmicas
+# Sistema de Gerenciamento de Pesquisas Acadêmicas
 
 Este projeto é uma aplicação Java de console para gerenciamento de pesquisas acadêmicas. 
 Utiliza **JDBC** para se conectar a um banco de dados **PostgreSQL**.
