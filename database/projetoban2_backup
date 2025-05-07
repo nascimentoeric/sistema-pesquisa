@@ -1,0 +1,615 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 17.4
+-- Dumped by pg_dump version 17.4
+
+-- Started on 2025-05-06 09:52:29
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 4 (class 2615 OID 2200)
+-- Name: public; Type: SCHEMA; Schema: -; Owner: pg_database_owner
+--
+
+CREATE SCHEMA public;
+
+
+ALTER SCHEMA public OWNER TO pg_database_owner;
+
+--
+-- TOC entry 4862 (class 0 OID 0)
+-- Dependencies: 4
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: pg_database_owner
+--
+
+COMMENT ON SCHEMA public IS 'standard public schema';
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 228 (class 1259 OID 17022)
+-- Name: financia; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.financia (
+    id_instituicao integer NOT NULL,
+    id_projeto integer NOT NULL
+);
+
+
+ALTER TABLE public.financia OWNER TO postgres;
+
+--
+-- TOC entry 218 (class 1259 OID 16949)
+-- Name: instituicao; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.instituicao (
+    id_instituicao integer NOT NULL,
+    nome character varying(100) NOT NULL,
+    tipo character varying(50),
+    pais character varying(50)
+);
+
+
+ALTER TABLE public.instituicao OWNER TO postgres;
+
+--
+-- TOC entry 217 (class 1259 OID 16948)
+-- Name: instituicao_id_instituicao_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.instituicao_id_instituicao_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.instituicao_id_instituicao_seq OWNER TO postgres;
+
+--
+-- TOC entry 4863 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: instituicao_id_instituicao_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.instituicao_id_instituicao_seq OWNED BY public.instituicao.id_instituicao;
+
+
+--
+-- TOC entry 225 (class 1259 OID 16997)
+-- Name: orientando; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.orientando (
+    id_orientando integer NOT NULL,
+    nome character varying(100) NOT NULL,
+    email character varying(100),
+    nivel_academico character varying(50),
+    id_projeto integer NOT NULL
+);
+
+
+ALTER TABLE public.orientando OWNER TO postgres;
+
+--
+-- TOC entry 224 (class 1259 OID 16996)
+-- Name: orientando_id_orientando_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.orientando_id_orientando_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.orientando_id_orientando_seq OWNER TO postgres;
+
+--
+-- TOC entry 4864 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: orientando_id_orientando_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.orientando_id_orientando_seq OWNED BY public.orientando.id_orientando;
+
+
+--
+-- TOC entry 223 (class 1259 OID 16981)
+-- Name: participa_projeto; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.participa_projeto (
+    id_pesquisador integer NOT NULL,
+    id_projeto integer NOT NULL,
+    papel character varying(50)
+);
+
+
+ALTER TABLE public.participa_projeto OWNER TO postgres;
+
+--
+-- TOC entry 220 (class 1259 OID 16956)
+-- Name: pesquisador; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.pesquisador (
+    id_pesquisador integer NOT NULL,
+    nome character varying(100) NOT NULL,
+    email character varying(100) NOT NULL,
+    instituicao character varying(100)
+);
+
+
+ALTER TABLE public.pesquisador OWNER TO postgres;
+
+--
+-- TOC entry 219 (class 1259 OID 16955)
+-- Name: pesquisador_id_pesquisador_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.pesquisador_id_pesquisador_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.pesquisador_id_pesquisador_seq OWNER TO postgres;
+
+--
+-- TOC entry 4865 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: pesquisador_id_pesquisador_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.pesquisador_id_pesquisador_seq OWNED BY public.pesquisador.id_pesquisador;
+
+
+--
+-- TOC entry 222 (class 1259 OID 16965)
+-- Name: projeto; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.projeto (
+    id_projeto integer NOT NULL,
+    id_coordenador integer,
+    id_instituicao integer,
+    titulo character varying(150) NOT NULL,
+    area_pesquisa character varying(100),
+    data_inicio date,
+    data_fim date
+);
+
+
+ALTER TABLE public.projeto OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 16964)
+-- Name: projeto_id_projeto_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.projeto_id_projeto_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.projeto_id_projeto_seq OWNER TO postgres;
+
+--
+-- TOC entry 4866 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: projeto_id_projeto_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.projeto_id_projeto_seq OWNED BY public.projeto.id_projeto;
+
+
+--
+-- TOC entry 227 (class 1259 OID 17009)
+-- Name: publicacao; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.publicacao (
+    id_publicacao integer NOT NULL,
+    id_projeto integer NOT NULL,
+    titulo character varying(150) NOT NULL,
+    tipo character varying(50),
+    data_publicacao date,
+    doi character varying(100)
+);
+
+
+ALTER TABLE public.publicacao OWNER TO postgres;
+
+--
+-- TOC entry 226 (class 1259 OID 17008)
+-- Name: publicacao_id_publicacao_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.publicacao_id_publicacao_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.publicacao_id_publicacao_seq OWNER TO postgres;
+
+--
+-- TOC entry 4867 (class 0 OID 0)
+-- Dependencies: 226
+-- Name: publicacao_id_publicacao_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.publicacao_id_publicacao_seq OWNED BY public.publicacao.id_publicacao;
+
+
+--
+-- TOC entry 4669 (class 2604 OID 16952)
+-- Name: instituicao id_instituicao; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.instituicao ALTER COLUMN id_instituicao SET DEFAULT nextval('public.instituicao_id_instituicao_seq'::regclass);
+
+
+--
+-- TOC entry 4672 (class 2604 OID 17000)
+-- Name: orientando id_orientando; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.orientando ALTER COLUMN id_orientando SET DEFAULT nextval('public.orientando_id_orientando_seq'::regclass);
+
+
+--
+-- TOC entry 4670 (class 2604 OID 16959)
+-- Name: pesquisador id_pesquisador; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.pesquisador ALTER COLUMN id_pesquisador SET DEFAULT nextval('public.pesquisador_id_pesquisador_seq'::regclass);
+
+
+--
+-- TOC entry 4671 (class 2604 OID 16968)
+-- Name: projeto id_projeto; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.projeto ALTER COLUMN id_projeto SET DEFAULT nextval('public.projeto_id_projeto_seq'::regclass);
+
+
+--
+-- TOC entry 4673 (class 2604 OID 17012)
+-- Name: publicacao id_publicacao; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.publicacao ALTER COLUMN id_publicacao SET DEFAULT nextval('public.publicacao_id_publicacao_seq'::regclass);
+
+
+--
+-- TOC entry 4856 (class 0 OID 17022)
+-- Dependencies: 228
+-- Data for Name: financia; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.financia (id_instituicao, id_projeto) FROM stdin;
+1	1
+2	2
+3	3
+1	3
+\.
+
+
+--
+-- TOC entry 4846 (class 0 OID 16949)
+-- Dependencies: 218
+-- Data for Name: instituicao; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.instituicao (id_instituicao, nome, tipo, pais) FROM stdin;
+1	Universidade de São Paulo	Universidade	Brasil
+2	Instituto Nacional de Pesquisas Espaciais	Instituto	Brasil
+3	Massachusetts Institute of Technology	Universidade	EUA
+\.
+
+
+--
+-- TOC entry 4853 (class 0 OID 16997)
+-- Dependencies: 225
+-- Data for Name: orientando; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.orientando (id_orientando, nome, email, nivel_academico, id_projeto) FROM stdin;
+1	Lucas Fernandes	lucas.fernandes@aluno.usp.br	Mestrado	1
+2	Carla Borges	carla.borges@aluno.inpe.br	Doutorado	2
+3	Felipe Souza	felipe.souza@aluno.mit.edu	Graduação	3
+\.
+
+
+--
+-- TOC entry 4851 (class 0 OID 16981)
+-- Dependencies: 223
+-- Data for Name: participa_projeto; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.participa_projeto (id_pesquisador, id_projeto, papel) FROM stdin;
+1	1	Coordenador
+2	1	Pesquisador Convidado
+2	2	Coordenador
+3	2	Pesquisador Convidado
+3	3	Coordenador
+\.
+
+
+--
+-- TOC entry 4848 (class 0 OID 16956)
+-- Dependencies: 220
+-- Data for Name: pesquisador; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.pesquisador (id_pesquisador, nome, email, instituicao) FROM stdin;
+1	Dra. Ana Paula Mendes	ana.mendes@usp.br	Universidade de São Paulo
+2	Dr. Carlos Silva	carlos.silva@inpe.br	Instituto Nacional de Pesquisas Espaciais
+3	Dr. Julia Hart	julia.hart@mit.edu	Massachusetts Institute of Technology
+\.
+
+
+--
+-- TOC entry 4850 (class 0 OID 16965)
+-- Dependencies: 222
+-- Data for Name: projeto; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.projeto (id_projeto, id_coordenador, id_instituicao, titulo, area_pesquisa, data_inicio, data_fim) FROM stdin;
+1	1	1	Análise de Dados Genômicos	Bioinformática	2023-01-10	2024-12-15
+2	2	2	Otimização de Redes Neurais	Inteligência Artificial	2022-08-01	2025-01-30
+3	3	3	Sustentabilidade Urbana com IoT	Tecnologia Ambiental	2024-03-15	2026-03-14
+\.
+
+
+--
+-- TOC entry 4855 (class 0 OID 17009)
+-- Dependencies: 227
+-- Data for Name: publicacao; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.publicacao (id_publicacao, id_projeto, titulo, tipo, data_publicacao, doi) FROM stdin;
+1	1	Métodos de Clusterização em Genômica	Artigo Científico	2024-01-10	10.1234/genomics.001
+2	2	Redes Neurais Profundas em Ambientes Reais	Conferência	2023-11-20	10.1234/ia.002
+3	3	Cidades Inteligentes com IoT Sustentável	Artigo Científico	2025-05-06	10.1234/iot.003
+\.
+
+
+--
+-- TOC entry 4868 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: instituicao_id_instituicao_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.instituicao_id_instituicao_seq', 3, true);
+
+
+--
+-- TOC entry 4869 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: orientando_id_orientando_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.orientando_id_orientando_seq', 3, true);
+
+
+--
+-- TOC entry 4870 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: pesquisador_id_pesquisador_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.pesquisador_id_pesquisador_seq', 3, true);
+
+
+--
+-- TOC entry 4871 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: projeto_id_projeto_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.projeto_id_projeto_seq', 3, true);
+
+
+--
+-- TOC entry 4872 (class 0 OID 0)
+-- Dependencies: 226
+-- Name: publicacao_id_publicacao_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.publicacao_id_publicacao_seq', 3, true);
+
+
+--
+-- TOC entry 4691 (class 2606 OID 17026)
+-- Name: financia financia_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.financia
+    ADD CONSTRAINT financia_pkey PRIMARY KEY (id_instituicao, id_projeto);
+
+
+--
+-- TOC entry 4675 (class 2606 OID 16954)
+-- Name: instituicao instituicao_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.instituicao
+    ADD CONSTRAINT instituicao_pkey PRIMARY KEY (id_instituicao);
+
+
+--
+-- TOC entry 4685 (class 2606 OID 17002)
+-- Name: orientando orientando_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.orientando
+    ADD CONSTRAINT orientando_pkey PRIMARY KEY (id_orientando);
+
+
+--
+-- TOC entry 4683 (class 2606 OID 16985)
+-- Name: participa_projeto participa_projeto_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.participa_projeto
+    ADD CONSTRAINT participa_projeto_pkey PRIMARY KEY (id_pesquisador, id_projeto);
+
+
+--
+-- TOC entry 4677 (class 2606 OID 16963)
+-- Name: pesquisador pesquisador_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.pesquisador
+    ADD CONSTRAINT pesquisador_email_key UNIQUE (email);
+
+
+--
+-- TOC entry 4679 (class 2606 OID 16961)
+-- Name: pesquisador pesquisador_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.pesquisador
+    ADD CONSTRAINT pesquisador_pkey PRIMARY KEY (id_pesquisador);
+
+
+--
+-- TOC entry 4681 (class 2606 OID 16970)
+-- Name: projeto projeto_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.projeto
+    ADD CONSTRAINT projeto_pkey PRIMARY KEY (id_projeto);
+
+
+--
+-- TOC entry 4687 (class 2606 OID 17016)
+-- Name: publicacao publicacao_doi_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.publicacao
+    ADD CONSTRAINT publicacao_doi_key UNIQUE (doi);
+
+
+--
+-- TOC entry 4689 (class 2606 OID 17014)
+-- Name: publicacao publicacao_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.publicacao
+    ADD CONSTRAINT publicacao_pkey PRIMARY KEY (id_publicacao);
+
+
+--
+-- TOC entry 4698 (class 2606 OID 17027)
+-- Name: financia financia_id_instituicao_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.financia
+    ADD CONSTRAINT financia_id_instituicao_fkey FOREIGN KEY (id_instituicao) REFERENCES public.instituicao(id_instituicao);
+
+
+--
+-- TOC entry 4699 (class 2606 OID 17032)
+-- Name: financia financia_id_projeto_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.financia
+    ADD CONSTRAINT financia_id_projeto_fkey FOREIGN KEY (id_projeto) REFERENCES public.projeto(id_projeto);
+
+
+--
+-- TOC entry 4696 (class 2606 OID 17003)
+-- Name: orientando orientando_id_projeto_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.orientando
+    ADD CONSTRAINT orientando_id_projeto_fkey FOREIGN KEY (id_projeto) REFERENCES public.projeto(id_projeto);
+
+
+--
+-- TOC entry 4694 (class 2606 OID 16986)
+-- Name: participa_projeto participa_projeto_id_pesquisador_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.participa_projeto
+    ADD CONSTRAINT participa_projeto_id_pesquisador_fkey FOREIGN KEY (id_pesquisador) REFERENCES public.pesquisador(id_pesquisador);
+
+
+--
+-- TOC entry 4695 (class 2606 OID 16991)
+-- Name: participa_projeto participa_projeto_id_projeto_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.participa_projeto
+    ADD CONSTRAINT participa_projeto_id_projeto_fkey FOREIGN KEY (id_projeto) REFERENCES public.projeto(id_projeto);
+
+
+--
+-- TOC entry 4692 (class 2606 OID 16971)
+-- Name: projeto projeto_id_coordenador_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.projeto
+    ADD CONSTRAINT projeto_id_coordenador_fkey FOREIGN KEY (id_coordenador) REFERENCES public.pesquisador(id_pesquisador);
+
+
+--
+-- TOC entry 4693 (class 2606 OID 16976)
+-- Name: projeto projeto_id_instituicao_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.projeto
+    ADD CONSTRAINT projeto_id_instituicao_fkey FOREIGN KEY (id_instituicao) REFERENCES public.instituicao(id_instituicao);
+
+
+--
+-- TOC entry 4697 (class 2606 OID 17017)
+-- Name: publicacao publicacao_id_projeto_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.publicacao
+    ADD CONSTRAINT publicacao_id_projeto_fkey FOREIGN KEY (id_projeto) REFERENCES public.projeto(id_projeto);
+
+
+-- Completed on 2025-05-06 09:52:29
+
+--
+-- PostgreSQL database dump complete
+--
+
