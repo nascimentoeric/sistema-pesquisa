@@ -40,7 +40,7 @@ Utiliza **JDBC** para se conectar a um banco de dados **PostgreSQL**.
 #### 6. Pressione Enter na opção Port [5432] (É a porta padrão geralmente utilizada, caso a sua não seja, digite sua porta).
 #### 7. Digite seu usuário do pgAdmin e pressione Enter.
 #### 8. Digite sua senha e pressione Enter. (É normal não aparecer nada, o shell vai avisar caso algo dê errado)
-#### 9. Copie e cole o comando = \i 'C:\\Users\\seu-usuario\\sistema-pesquisa\\database\\dumpbanco' (Substitua o caminho exemplo pelo caminho onde está o seu arquivo .sql da database)
+#### 9. Copie e cole o comando = \i 'C:\\\Users\\\seu-usuario\\\sistema-pesquisa\\\database\\\dumpbanco' (Substitua o caminho exemplo pelo caminho onde está o seu arquivo .sql da database)
 #### 10. Digite \q e pressione Enter duas vezes. (O terminal deve fechar)
 #### 11. Abra o projeto na IDE desejada. (recomendado Apache NetBeans 25)
 #### 12. Modifique dentro do arquivo Conexao.java as variáveis user e senha para o usuário e senha do seu banco no pgAdmin.
