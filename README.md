@@ -41,9 +41,10 @@ Utiliza **JDBC** para se conectar a um banco de dados **PostgreSQL**.
 #### 7. Digite seu usuário do PostgreSQL e pressione Enter.
 #### 8. Digite sua senha e pressione Enter. (É normal não aparecer nada, o shell vai avisar caso algo dê errado)
 #### 9. Copie e cole o comando = \i 'C:\\Users\\seu-usuario\\sistema-pesquisa\\database\\dumpbanco' (Substitua o caminho exemplo pelo caminho onde está o seu arquivo .sql da database)
-#### 10. Abra o projeto na IDE desejada. (recomendado Apache NetBeans 25)
-#### 11. Modifique dentro do arquivo Conexao.java as variáveis user e senha para o usuário e senha do seu banco no pgAdmin.
-#### 12. Ainda no Conexao.java, modifique o final da url para o nome da sua database. Exemplo: "jdbc:postgresql://localhost:5432/minha-database"
-#### 13. Baixe o driver postgresql-42.7.4.jar no link https://jdbc.postgresql.org/download/postgresql-42.7.4.jar
-#### 14. Insira o driver como um Classpath. (No NetBeans, se encontra em Propriedades do projeto -> Bibliotecas)
-#### 15. Salve e execute a classe Principal.java para começar a utilizar.
+#### 10. Digite \q e pressione Enter duas vezes. (O terminal deve fechar)
+#### 11. Abra o projeto na IDE desejada. (recomendado Apache NetBeans 25)
+#### 12. Modifique dentro do arquivo Conexao.java as variáveis user e senha para o usuário e senha do seu banco no pgAdmin.
+#### 13. Ainda no Conexao.java, modifique o final da url para o nome da sua database. Exemplo: "jdbc:postgresql://localhost:5432/minha-database"
+#### 14. Baixe o driver postgresql-42.7.4.jar no link https://jdbc.postgresql.org/download/postgresql-42.7.4.jar
+#### 15. Insira o driver como um Classpath. (No NetBeans, se encontra em Propriedades do projeto -> Bibliotecas)
+#### 16. Salve e execute a classe Principal.java para começar a utilizar.
